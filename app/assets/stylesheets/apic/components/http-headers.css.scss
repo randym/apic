@@ -1,0 +1,38 @@
+.http-headers-component {
+  display: none;
+  min-height: 130px;
+  overflow-y: scroll;
+  h4 {
+    text-align: center;
+  }
+  .http-headers {
+    ul {
+      border: 1px solid #eee;
+      min-height: 100px;
+      margin-bottom: 5px;
+    }
+    .header-key {
+      display: inline-block;
+      height: 100%;
+      width: 100px;
+      text-align: right;
+      padding-right: 10px;
+      overflow: hidden;
+    }
+    a {
+      span {
+        display: inline-block;
+        overflow: hidden;
+      }
+    }
+    a:hover {
+      background-color: #0088cc;
+      color: #FFF
+    }
+  }
+  .http-headers-controls {
+    span {
+      margin-left: 5px;
+    }
+  }
+}
