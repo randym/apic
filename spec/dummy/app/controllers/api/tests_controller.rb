@@ -1,5 +1,7 @@
 class Api::TestsController < ActionController::Base
+  before_filter :authenticate, except: :index
   apic_action_params new: [:name, :acceptance],
+                     create: [:name, :acceptance],
                      edit: [:name, :acceptance],
                      update: [:name, :acceptance]
   def index
@@ -18,5 +20,10 @@ class Api::TestsController < ActionController::Base
   end
 
   def delete
+  end
+
+  private
+  def authenticate
+
   end
 end
