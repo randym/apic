@@ -1,0 +1,14 @@
+div.endpoints-component( data-endpoints="#{@endpoints.to_json}")
+  h4 Endpoints
+  div.endpoints
+    form.form-horizontal
+      div.control-group
+        label.control-label(for="selectEndpoint") Api Endpoint
+        div.controls
+          select(id='selectEndpoint')
+
+      div.control-group.template
+        label.control-label(for="inputParam") Param Name
+        div.controls
+          input.input-xxlarge(id="inputParam" type="text")
+

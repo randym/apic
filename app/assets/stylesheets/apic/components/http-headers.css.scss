@@ -1,5 +1,13 @@
-.http-headers-component {
+.headers {
+  border-bottom: 1px solid #DDD;
+  padding: 5px;
   display: none;
+}
+#httpHeadersModal {
+  width: 800px;
+}
+.http-headers-component {
+  margin-left: 10px;
   min-height: 130px;
   overflow-y: scroll;
   h4 {
@@ -14,7 +22,7 @@
     .header-key {
       display: inline-block;
       height: 100%;
-      width: 100px;
+      width: 180px;
       text-align: right;
       padding-right: 10px;
       overflow: hidden;

@@ -1,33 +1,28 @@
-# Plugin for adding and removing HTTP headers
-# a name value pair for now - can we validate? 
-# should we?
 $.fn.extend
   httpHeaders: (options) ->
     settings =
       presets: {}
-      debug: false
 
     $.each $(this).data(), (key, value) ->
       settings[key] = value
 
     settings = $.extend settings, options
 
-    self = this
-    selected = undefined
-
     $(this).data('items', settings.presets)
 
+    self = this
+
+    selected = undefined
+
     add = ->
-      name = $('#inputHttpHeaderName').val()
+      name = $('#selectHttpHeaderFieldName').val()
       value = $('#inputHttpHeaderValue').val()
-      if !!name or  !!value
+      if !!name and !!value
         tmp_items = items()
         tmp_items[name] = value
         $(self).data('items', tmp_items)
         populate()
         $('#httpHeadersModal').modal('hide')
-      else
-        alert('wha?')
 
     remove = ->
       if self.selected
@@ -39,21 +34,27 @@ $.fn.extend
         populate()
 
     edit = ->
-      event.stopPropagation()
       name = self.selected.data('key')
       headers = items()
       value = headers[name]
-      $('#inputHttpHeaderName').val(name)
+      $('#selectHttpHeaderFieldName').val(name)
       $('#inputHttpHeaderValue').val(value)
       $('#httpHeadersModal').modal('show')
 
     create = ->
-      $('#inputHttpHeaderName').val('')
+      $('#selectHttpHeaderFieldName').prop("selectedIndex",0)
       $('#inputHttpHeaderValue').val('')
       $('#httpHeadersModal').modal('show')
 
     show = ->
-      $('.http-headers-component').toggle()
+      el = $('.headers')
+      el.toggle()
+
+      li = $(event.target).closest('li')
+      if $(el).is(":visible")
+        li.addClass('active')
+      else
+        li.removeClass('active')
 
     list = ->
       $(self).find('ul')
@@ -65,7 +66,7 @@ $.fn.extend
     populate = ->
       list().empty()
       $.each items(), (key, value) ->
-        list().append('<li class="http-header-item" data-key="' + key + '"><a href="#"><span class="header-key">' + key + ':</span><span class="header-value">' + value + '</span></a></li>')
+        list().append(list_item(key, value))
       select list().find('li:first')
 
 
@@ -76,6 +77,11 @@ $.fn.extend
       $(el).addClass('active')
       self.selected = $(el)
 
+    list_item = (key, value)->
+      '<li class="http-header-item" data-key="' + key + '">' +
+      '<a href="#"><span class="header-key">' + key + ':</span>' +
+      '<span class="header-value">' + value + '</span></a></li>'
+
     populate()
 
     $('#httpHeadersModal a.add-http-header').on('click', -> add.apply self)
@@ -85,6 +91,7 @@ $.fn.extend
     $('.http-headers-list').on('click', 'li', -> select this)
     $('.http-headers-list').on('dblclick', 'li', -> edit.apply self)
     $('.edit-headers').on('click', -> show.apply self)
+
     this
 
 

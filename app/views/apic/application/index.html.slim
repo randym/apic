@@ -1,36 +1,6 @@
-
-a.btn.edit-headers(href='#') edit headers
-div.row
-  div.http-headers-component.span8
-    h4
-      == "HTTP Headers"
-    div.http-headers
-      ul.http-headers-list.nav.nav-list
-
-    div.http-headers-controls
-      a.btn.create-http-header(href='#httpHeadersModal')
-        == "+"
-      a(href='#' class='btn remove-http-header')
-        == "-"
-div.modal.hide.fade(id='httpHeadersModal')
-  div.modal-header
-    button.close(type='button' data-dismiss='modal' aria-hidden='true')
-      == "&times;"
-    h3
-      Http Headers
-  div.modal-body
-    form.form-horizontal
-      div.control-group
-        label.control-label(for='inputHttpHeaderName') Name
-        div.controls
-          input(type='text' id='inputHttpHeaderName' placeholder='header name')
-      div.control-group
-        label.control-label(for='inputHttpHeaderValue') Name
-        div.controls
-          input(type='text' id='inputHttpHeaderValue' placeholder='value')
-  div.modal-footer
-    a.btn(href='#' data-dismiss='modal') Cancel
-    a.btn.btn-primary.add-http-header(href='#') Ok
-
-div.row
-  span some other content
+div.container
+  == render :partial => "navigation"
+  == render :partial => "apic/application/components/http_headers"
+  div.row.endpoints
+    == render :partial => "apic/application/components/endpoints"
+    span some other content
