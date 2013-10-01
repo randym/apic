@@ -25,7 +25,6 @@ $.fn.extend
 
     log_request = (xhr)  ->
       self._start = new Date().getTime()
-      console.log xhr
       log_message "Request URL", uri()
       log_message "Request Method", endpoint().verb
       log_message "Response Code", [xhr.status, xhr.statusText].join(' ')
@@ -95,7 +94,7 @@ $.fn.extend
 
     request = () ->
       xhr = new XMLHttpRequest
-      xhr.open endpoint().verb, uri()
+      xhr.open endpoint().verb, uri(), true
       set_headers xhr
       xhr.onerror = (xhr) ->
         onerror.apply self, [xhr]
@@ -105,6 +104,8 @@ $.fn.extend
 
     set_headers = (xhr) ->
       $.each headers(), (key, value) ->
+        if key is 'Authorization'
+          xhr.withCredentials = true
         xhr.setRequestHeader(key, value)
 
     validate_params = () ->
@@ -112,14 +113,17 @@ $.fn.extend
       for part in endpoint().parts
         if value_for(part) is ""
           missing.push(part)
-        if missing.length > 0
-          alert('url parts reqired: ' + missing)
+      if missing.length > 0
+        alert('url parts reqired: ' + missing)
       missing.length is 0
 
     send = () ->
       if validate_params()
         xhr = request()
+        console.log xhr.withCredentials
         if endpoint().verb is 'GET'
           xhr.send()
         else
-          xhr.send JSON.stringify(body)
+          data = JSON.stringify(body())
+          xhr.send(data)
+      true

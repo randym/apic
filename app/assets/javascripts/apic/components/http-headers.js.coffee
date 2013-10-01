@@ -1,7 +1,7 @@
 $.fn.extend
   httpHeaders: (options) ->
     settings =
-      presets: {}
+      presets: {'Content-Type': 'application/json'}
 
     $.each $(this).data(), (key, value) ->
       settings[key] = value
