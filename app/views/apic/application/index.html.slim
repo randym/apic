@@ -3,4 +3,8 @@ div.container
   == render :partial => "apic/application/components/http_headers"
   div.row.endpoints
     == render :partial => "apic/application/components/endpoints"
-    span some other content
+  div.row
+    div.btn-toolbar
+      button#do-me.btn.btn-primary(href='#') Send
+  div.row
+    == render :partial => "apic/application/components/console"

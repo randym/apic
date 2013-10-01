@@ -7,10 +7,7 @@ class Api::TestsController < ActionController::Base
   def index
   end
 
-  def new
-  end
-
-  def update
+  def create
   end
 
   def show
@@ -19,11 +16,10 @@ class Api::TestsController < ActionController::Base
   def update
   end
 
-  def delete
+  def destroy
   end
 
   private
   def authenticate
-
   end
 end

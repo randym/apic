@@ -1,37 +1,53 @@
 $.fn.extend
   endpoints: (options) ->
     settings =
-      presets: {}
+      select: '#selectEndpoint',
+      template: '.template',
+      parameter: '.parameter'
 
     self = this
 
+    settings = $.extend settings, options
+
     endpoints = $(self).data('endpoints')
-    selected = undefined
 
     $.each endpoints, (key, value) ->
-      $('#selectEndpoint').append('<option>'+ key + '</option>')
+      option = $('<option>'+ key + '</option>')
+      console.log value
+      option.text('[restricted] ' + option.text()) if value.authorization_required
+      $(settings.select).append(option)
 
     change = ->
-      $(self).find('.parameter').remove()
-      key = $('#selectEndpoint').val()
-      selected = endpoints[key]
-      params = selected['parts'].concat selected['template']
-      $.each params, (index, name) ->
-        el = field_set_for name
-        if ['DELETE', 'PATCH'].indexOf selected['verb'] >= 0
-          el.find('#input-_method').val(selected['verb'].toLowerCase())
+      endpoint = selected()
+      $(self).data('endpoint', endpoint)
+      populate_params endpoint
 
-    field_set_for = (name) ->
-      clone = $(self).find('.template').clone()
+    populate_params = (endpoint) ->
+      $(self).find(settings.parameter).remove()
+      $.each endpoint.parts, (index, name) ->
+        field_set_for name, {required: true}
+      $.each endpoint.template, (index, name) ->
+        el = field_set_for name
+        if ['DELETE', 'PATCH'].indexOf endpoint.verb >= 0
+          el.find('#input-_method').val(endpoint.verb.toLowerCase())
+
+    selected = ->
+      endpoints[$(settings.select).val()]
+
+    field_set_for = (name, options={}) ->
+      clone = $(self).find(settings.template).clone()
       label = clone.find('label')
       label.attr('for', "input-" + name)
       label.text(name)
       clone.find('input').attr('id', "input-"+name)
       clone.find('input').attr('name', name)
-      clone.addClass('parameter')
-      clone.removeClass('template')
+      clone.addClass(settings.parameter.slice(1))
+      clone.removeClass(settings.template.slice(1))
+      if options.required
+        clone.find('input').prop('required',true)
       $(self).find('form').append(clone)
 
-    $('#selectEndpoint').on 'change', -> change.apply self
+    $(settings.select).on 'change', -> change.apply self
+    change.apply self
 
     this

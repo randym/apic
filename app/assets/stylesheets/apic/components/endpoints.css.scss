@@ -1,3 +1,9 @@
+.authorization_required {
+  background-color: red;
+}
 .template {
   display: none;
+}
+input.required {
+  border-color: red;
 }
