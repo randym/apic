@@ -1,3 +1,4 @@
 Apic::Engine.routes.draw do
-  root "#index"
+  #TODO may need to have some rails version switching here
+  match "/" => "root#index"
 end
