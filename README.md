@@ -45,8 +45,4 @@ Tell us what your authorization filter is!
 Apic.authorization_filter = :authenticate
 ```
 
-
-git remote add origin https://github.com/randym/apic.git
-
-
 This project rocks and uses MIT-LICENSE.
