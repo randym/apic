@@ -5,7 +5,7 @@ PATH
       bootstrap-sass (~> 2.3.2.2)
       coffee-rails
       jquery-rails
-      rails (~> 4.0.0)
+      rails (>= 3.2.0)
       sass-rails (>= 3.2)
       slim-rails (~> 2.0.1)
 
