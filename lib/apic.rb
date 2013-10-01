@@ -7,9 +7,14 @@ module Apic
   mattr_accessor :authorization_filter
   @@authorization_filter = nil
 
+  mattr_accessor :route_matcher
+  @@route_matcher = /\/api\//
+
+
+
   def self.endpoints
     @endpoints ||= Rails.application.routes.routes.reduce({}) do |hash, route|
-      if route.path.spec.to_s =~ /\/api\//
+      if route.path.spec.to_s =~ @@route_matcher
         route_spec = {
           path: route.path.spec.to_s.gsub("(.:format)",".json"),
           parts: route.parts - [:format],
