@@ -85,4 +85,30 @@ If you specify in your configuration the before_filter you are using for authent
 Apic.authentication_filter = :authenticate
 ```
 
+## Requirements
+
+APIc _should_ work on any Rails 3.2+ application out of the box.
+If it doesn't, send me a pull request!!
+
+## Roadmap
+
+APIc is still in the very early days. I've gone with greater developer (as in me!) productivity at the cost of more dependencies
+in the gem. Moving forward, I'd like to see the following:
+
+- Rebuild views with vanilla erb so I can drop slim-rails
+- Find someone who rocks at css/design and ditch bootstrap/sass
+- Rewrite the jquery plugins in vanilla js so I can drop jquery and coffee
+
+Under the 'fun' section comes
+
+- Implement OAuth and Basic authentication as well as token caching
+- Collect and display response time metrics
+- Spec and Doc the crap out of it!
+
+I guess when all that is done, APIc goes to 1.0.0
+
+# Contribute
+
+Just Do It!
+
 This project rocks and uses MIT-LICENSE.
