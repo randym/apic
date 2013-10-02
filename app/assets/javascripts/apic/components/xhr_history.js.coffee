@@ -35,6 +35,12 @@ $.fn.extend
       el = $('.history')
       el.toggle()
 
+      li = $(event.target).closest('li')
+      if $(el).is(':visible')
+        li.addClass('active')
+      else
+        li.removeClass('active')
+
     #$(self).on('refresh', -> refresh.apply self)
     $(self).on('add', (e, item) -> add.apply self, [item])
     $('.xhr-history').on('dblclick', 'li', (e) -> replay this)
