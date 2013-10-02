@@ -59,7 +59,7 @@ end
 
 ### Initializer
 
-The apic:install generator will add in a default intializer providing examples of the route matching and authentication filtering.
+The apic:install generator will mount APIc to /apic and add in a default intializer providing examples of the route matching and authentication filtering.
 
 ```
 config/initializers/apic.rb
