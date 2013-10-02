@@ -1,0 +1,16 @@
+.history {
+  display: none;
+  border-top: 1px solid #DDD;
+  padding: 5px;
+}
+.xhr-history {
+  list-style-type: none;
+  i.forbidden {
+    background-color: red;
+    margin-right: 5px;
+  }
+  i.ok {
+    background-color: green;
+    margin-right: 5px;
+  }
+}
