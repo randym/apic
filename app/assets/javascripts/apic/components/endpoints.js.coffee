@@ -31,7 +31,7 @@ $.fn.extend
           el.find('#input-_method').val(endpoint.verb.toLowerCase())
 
     selected = ->
-      endpoints[$(settings.select).val()]
+      endpoints[$(settings.select).val().replace('[restricted] ', '')]
 
     field_set_for = (name, options={}) ->
       clone = $(self).find(settings.template).clone()
