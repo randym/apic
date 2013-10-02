@@ -41,12 +41,12 @@ localhost:3000/apic
 
 ### Controller Parameters
 
-APIc needs to know about the parameters your PUT, PATCH and UPDATE requests require. 
+APIc needs to know about the parameters your PUT, PATCH and UPDATE requests require.
 To make this as simple and painless as possible, APIc exposes a DSL to your controllers so you can specify what you need.
-APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH, and DELETE requests.
+APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH and DELETE requests.
 
 ```
-class MyController << ActionController.base
+class TestController << ActionController.base
 
   apic_action_params create: [:name, :acceptance]
 
@@ -54,9 +54,18 @@ class MyController << ActionController.base
     # all your cool stuff that creates a new object
   end
 
+end
 ```
 
-### Route Filtering
+### Initializer
+
+The apic:install generator will add in a default intializer providing examples of the route matching and authentication filtering.
+
+```
+config/initializers/apic.rb
+```
+
+#### Route Matching
 
 APIc will load all routes in your rails app by default under the assumption that you are building your api as a dedicated service.
 If this is not the case, you can specify a matching regular expression that APIc will use to find your API routes.
@@ -64,8 +73,11 @@ If this is not the case, you can specify a matching regular expression that APIc
 For example, if you have namespecs all of your api endpoints to /api/v1/ simply uncomment out the Apic.routes_matcher line in config/initializers/apic.rb
 
 ```
+Apic.route_matcher = /\/api\/v1\//
+```
 
-### Authentication filters
+#### Authentication filters
+
 When testing your API it is often convenient to know which routes require authentication as you will need to add those headers before sending your request.
 If you specify in your configuration the before_filter you are using for authentication APIc will mark those routes as restricted.
 
