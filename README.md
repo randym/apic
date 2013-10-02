@@ -5,6 +5,9 @@
 APIc is a bolt on API console for Rails 3+ applications.
 It rounds up your endpoints and makes it dead easy to configure, send, review and replay any request.
 
+
+![Screen 1](https://github.com/randym/apic/raw/master/sample.png)
+
 What you need to do?
 
 add the gem to your Gemfile
