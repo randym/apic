@@ -37,9 +37,10 @@ localhost:3000/apic
 ## Configuration
 
 ### Controller Parameters
+
 APIc needs to know about the parameters your PUT, PATCH and UPDATE requests require. 
 To make this as simple and painless as possible, APIc exposes a DSL to your controllers so you can specify what you need.
-APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH, PUT and DELETE requests.
+APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH, and DELETE requests.
 
 ```
 class MyController << ActionController.base
@@ -53,6 +54,7 @@ class MyController << ActionController.base
 ```
 
 ### Route Filtering
+
 APIc will load all routes in your rails app by default under the assumption that you are building your api as a dedicated service.
 If this is not the case, you can specify a matching regular expression that APIc will use to find your API routes.
 

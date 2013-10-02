@@ -4,8 +4,8 @@ require "apic/engine"
 require "apic/generators/install_generator"
 module Apic
 
-  mattr_accessor :authorization_filter
-  @@authorization_filter = nil
+  mattr_accessor :authentication_filter
+  @@authentication_filter = nil
 
   mattr_accessor :route_matcher
   @@route_matcher = /\/api\//
@@ -35,12 +35,11 @@ module Apic
   end
 
   def self.requires_authorization(controller, action_name)
-    return false unless @@authorization_filter
+    return false unless @@authentication_filter
     controller = (controller + '_controller').camelize.constantize
     controller._process_action_callbacks.any? do |callback|
-      p @@authorization_filter
       eval <<-RUBY_EVAL
-      #{callback.filter == @@authorization_filter} && #{callback.instance_values['compiled_options']}
+      #{callback.filter == @@authentication_filter} && #{callback.instance_values['compiled_options']}
       RUBY_EVAL
     end
   end
