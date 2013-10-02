@@ -1,7 +1,7 @@
 require 'apic/params_cache'
 require "apic/extension"
 require "apic/engine"
-
+require "apic/generators/install_generator"
 module Apic
 
   mattr_accessor :authorization_filter

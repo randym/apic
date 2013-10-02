@@ -1,6 +1,7 @@
 module Apic
   class ApplicationController < ActionController::Base
     def index
+      Rails.logger.debug endpoints
       endpoints
     end
 

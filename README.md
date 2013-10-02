@@ -1,8 +1,9 @@
-= Apic
+= APIc
 
-[![Build Status](https://secure.travis-ci.org/hsbt/whispered.png)](https://travis-ci.org/hsbt/whispered) [![Coverage Status](https://coveralls.io/repos/randym/apic/badge.png?branch=master)](https://coveralls.io/r/randym/apic) [![Dependency Status](https://gemnasium.com/randym/apic.png)](https://gemnasium.com/randym/apic) [![Code Climate](https://codeclimate.com/github/randym/apic.png)](https://codeclimate.com/github/randym/apic)
+## What is it?
 
-![Screen 1](https://github.com/randym/apic/raw/master/sample.png)
+APIc is a bolt on API console for Rails 3+ applications.
+It rounds up your endpoints and makes it dead easy to configure, send, review and replay any request.
 
 What you need to do?
 
@@ -12,37 +13,59 @@ add the gem to your Gemfile
 gem 'apic'
 ```
 
-require the gem in your application.rb
+Run the generator!
 
 ```
-require 'apic'
+rails generate apic:install
 ```
 
-mount the gem in your routes.rb
+If you are using bundler:
 
 ```
-mount Apic::Engine, :at => "/apic"
-```
-
-## and some groovy stuff too
-
-Specify action paramters in your api controllers
+bundle exec rails generate apic:install
 
 ```
-apic_action_params create: [:name, :acceptance]
-```
 
-Filter routes on a regex match
-
+Spin up your Rails application and navigate to
 
 ```
-Apic.routes_matcher = /\/api\//
+localhost:3000/apic
 ```
 
-Tell us what your authorization filter is!
+
+
+## Configuration
+
+### Controller Parameters
+APIc needs to know about the parameters your PUT, PATCH and UPDATE requests require. 
+To make this as simple and painless as possible, APIc exposes a DSL to your controllers so you can specify what you need.
+APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH, PUT and DELETE requests.
 
 ```
-Apic.authorization_filter = :authenticate
+class MyController << ActionController.base
+
+  apic_action_params create: [:name, :acceptance]
+
+  def create
+    # all your cool stuff that creates a new object
+  end
+
+```
+
+### Route Filtering
+APIc will load all routes in your rails app by default under the assumption that you are building your api as a dedicated service.
+If this is not the case, you can specify a matching regular expression that APIc will use to find your API routes.
+
+For example, if you have namespecs all of your api endpoints to /api/v1/ simply uncomment out the Apic.routes_matcher line in config/initializers/apic.rb
+
+```
+
+### Authentication filters
+When testing your API it is often convenient to know which routes require authentication as you will need to add those headers before sending your request.
+If you specify in your configuration the before_filter you are using for authentication APIc will mark those routes as restricted.
+
+```
+Apic.authentication_filter = :authenticate
 ```
 
 This project rocks and uses MIT-LICENSE.
