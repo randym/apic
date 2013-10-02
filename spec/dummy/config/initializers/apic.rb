@@ -1,1 +1,1 @@
-Apic.authentication_filter :authenticate
+Apic.authentication_filter = :authenticate
