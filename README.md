@@ -1,4 +1,4 @@
-= APIc
+# APIc
 
 ## What is it?
 
