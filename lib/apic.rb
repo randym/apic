@@ -21,9 +21,11 @@ module Apic
           verb: route.verb.source.gsub(/[\^\$]/,''),
           template: template_for(route.defaults[:controller], route.defaults[:action])
         }
+
         if %(PATCH DELETE).include? route_spec[:verb]
           route_spec[:template] = route_spec[:template] + ['_method']
         end
+
         if requires_authorization route.defaults[:controller], route.defaults[:action]
           route_spec[:authorization_required] = true
         end
