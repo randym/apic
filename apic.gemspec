@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["digital.ipseity@gmail.com"]
   s.homepage    = "https://github.com/randym/apic/"
   s.summary     = "Apic is a mountable rails engine that enables a web based console for testing api endpoints."
-  s.description = s.summary
+  s.description = "APIc is a bolt on API console for Rails 3+ applications. It rounds up your endpoints and makes it dead easy to configure, send, review and replay any request."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
