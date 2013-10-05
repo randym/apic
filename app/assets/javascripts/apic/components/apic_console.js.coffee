@@ -127,14 +127,25 @@ $.fn.extend
       missing.length is 0
 
     record = (xhr) ->
+      params = {}
+      $.map $(settings.params +  " input"), (param) ->
+        params[$(param).attr('name')] = $(param).val()
+
       history_item =
         endpoint: endpoint()
         headers: headers()
         body: body()
         uri: uri()
         xhr: xhr
+        parameters: params
 
       $(settings.history).trigger('add', [history_item])
+
+    replay = (request) ->
+      r = $.extend true, {}, request
+      $(settings.headers).trigger 'set', [r.headers]
+      $(settings.endpoint).trigger 'set', [r.endpoint, r.parameters]
+      send r.endpoint, r.headers, r.body, r.uri
 
     send = (_point, _head, _bod, _u) ->
       _point ||= endpoint()
@@ -151,5 +162,7 @@ $.fn.extend
           xhr.send(data)
 
     $('#do-me').on('click', -> send.apply self, [null])
-    $(self).on('send', (e, point, head, bod, u) -> send.apply self, [point, head, bod, u])
+
+    $(self).on('replay', (e, request) -> replay.apply self, [request])
+
     true

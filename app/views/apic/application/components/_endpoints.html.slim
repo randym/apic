@@ -1,4 +1,4 @@
-div.endpoints-component( data-endpoints="#{@endpoints.to_json}")
+div.endpoints-component(data-endpoints="#{@endpoints.to_json}")
   h4 Endpoints
   div.endpoints
     form.form-horizontal
@@ -6,9 +6,36 @@ div.endpoints-component( data-endpoints="#{@endpoints.to_json}")
         label.control-label(for="selectEndpoint") Api Endpoint
         div.controls
           select.input-xxlarge(id='selectEndpoint')
-
-      div.control-group.template
-        label.control-label(for="inputParam") Param Name
+      div.control-group
+        label.control-label Parameters
         div.controls
+          a.btn.create-parameter(href='#endpointsModal')
+            == "+"
+
+      div.controls.parameters
+
+    div.control-group.template
+      label.control-label(for="inputParam") Param Name
+      div.controls
+        div.input-prepend
+          span.add-on.remove-parameter
+            i.icon-remove.hide
           input.input-xxlarge(id="inputParam" type="text")
+
+div.modal.hide.fade#endpointsModal
+  div.modal-header
+    button.close(type='button' data-dismiss='modal' aria-hidden='true')
+      == "&times;"
+    h4 Custom Parameter
+  div.modal-body
+    form.form-horizontal
+      div.control-group
+        label.control-label(for='inputParameterFieldName') Value
+        div.controls
+          input.input-xlarge#inputParameterFieldName(type='text' placeholder='Parameter Name')
+
+  div.modal-footer
+    a.btn(href='#' data-dismiss='modal') Cancel
+    a.btn.btn-primary.add-parameter(href='#') Ok
+
 

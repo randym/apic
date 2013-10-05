@@ -28,8 +28,7 @@ $.fn.extend
 
     replay = (el) ->
       request = $(el).data('request')
-      $('.console').trigger('send', [request.endpoint, request.headers, request.body, request.uri])
-      console.log($(el).data('request'))
+      $('.console').trigger('replay', [request])
 
     show = ->
       el = $('.history')

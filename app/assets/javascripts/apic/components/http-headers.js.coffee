@@ -49,6 +49,11 @@ $.fn.extend
     $('#inputHttpHeaderFieldName').typeahead({source: settings.headers})
     selected = undefined
 
+    set = (data) ->
+      $(self).data('items', data)
+      populate()
+      true
+
     add = ->
       name = $('#inputHttpHeaderFieldName').val()
       value = $('#inputHttpHeaderValue').val()
@@ -126,6 +131,7 @@ $.fn.extend
     $('.http-headers-list').on('click', 'li', -> select this)
     $('.http-headers-list').on('dblclick', 'li', -> edit.apply self)
     $('.edit-headers').on('click', -> show.apply self)
+    $(self).on 'set', (e, headers) -> set.apply self, [headers]
 
     this
 
