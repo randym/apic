@@ -37,7 +37,7 @@ $.fn.extend
       populate_params endpoint
 
     set = (point, param) ->
-      option = if point.authentication_required then settings.restricted + param.key else param.key
+      option = if point.authentication_required then settings.restricted + point.key else point.key
       $(settings.select).val(option)
 
       change()
