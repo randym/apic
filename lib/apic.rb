@@ -10,7 +10,8 @@ module Apic
   mattr_accessor :route_matcher
   @@route_matcher = /\/api\//
 
-
+  mattr_accessor :custom_headers
+  @@custom_headers = []
 
   def self.endpoints
     @endpoints ||= Rails.application.routes.routes.reduce({}) do |hash, route|

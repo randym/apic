@@ -8,3 +8,4 @@
 # as restricted in the Api endpoints list.
 #
 Apic.authentication_filter = :authenticate
+Apic.custom_headers = ['HTTP-JUST-FOR-ME']

@@ -41,8 +41,9 @@ $.fn.extend
       else
         li.removeClass('active')
 
-    #$(self).on('refresh', -> refresh.apply self)
+    $(self).on('refresh', -> refresh.apply self)
     $(self).on('add', (e, item) -> add.apply self, [item])
-    $('.xhr-history').on('dblclick', 'li', (e) -> replay this)
+    $('.xhr-history').on('click', 'li', (e) -> replay this)
     $('.toggle-history').on('click', -> show.apply self)
+
     this

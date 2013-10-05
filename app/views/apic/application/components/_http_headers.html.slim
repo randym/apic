@@ -1,7 +1,7 @@
 div.row.headers
   div.http-headers-component
     h4 HTTP Headers
-    div.http-headers
+    div.http-headers(data-headers="#{@custom_headers}")
       ul.http-headers-list.nav.nav-list
 
     div.http-headers-controls
@@ -18,45 +18,13 @@ div.row.headers
     div.modal-body
       form.form-horizontal
         div.control-group
-          label.control-label(for='selectHttpHeaderFieldName') Header
+          label.control-label(for='inputHttpHeaderFieldName') Header
           div.controls
-            select(id='selectHttpHeaderFieldName')
-              option Accept
-              option Accept-Charset
-              option Accept-Datetime
-              option Accept-Encoding
-              option Accept-Language
-              option Authorization
-              option Cache-Control
-              option Connection
-              option Content-Length
-              option Content-MD5
-              option Content-Type
-              option Cookie
-              option Date
-              option Expect
-              option From
-              option Host
-              option If-Match
-              option If-Modified-Since
-              option If-None-Match
-              option If-Range
-              option If-Unmodified-Since
-              option Max-Forwards
-              option Origin
-              option Pragma
-              option Proxy-Authorization
-              option Range
-              option Referer
-              option TE
-              option Upgrade
-              option User-Agent
-              option Via
-              option Warning
+            input#inputHttpHeaderFieldName
         div.control-group
           label.control-label(for='inputHttpHeaderValue') Value
           div.controls
-            input.input-xxlarge(type='text' id='inputHttpHeaderValue' placeholder='value')
+            input.input-xxlarge#inputHttpHeaderValue(type='text' placeholder='value')
 
     div.modal-footer
       a.btn(href='#' data-dismiss='modal') Cancel

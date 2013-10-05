@@ -1,21 +1,56 @@
 $.fn.extend
   httpHeaders: (options) ->
-    settings =
-      presets: {'Content-Type': 'application/json'}
+    defaults =
+      presets: {'Content-Type': 'application/json'},
+      headers: [
+        'Accept',
+        'Accept-Charset',
+        'Accept-Datetime',
+        'Accept-Encoding',
+        'Accept-Language',
+        'Authorization',
+        'Cache-Control',
+        'Connection',
+        'Content-Length',
+        'Content-MD5',
+        'Content-Type',
+        'Cookie',
+        'Date',
+        'Expect',
+        'From',
+        'Host',
+        'If-Match',
+        'If-Modified-Since',
+        'If-None-Match',
+        'If-Range',
+        'If-Unmodified-Since',
+        'Max-Forwards',
+        'Origin',
+        'Pragma',
+        'Proxy-Authorization',
+        'Range',
+        'Referer',
+        'TE',
+        'Upgrade',
+        'User-Agent',
+        'Via',
+        'Warning'
+      ]
 
     $.each $(this).data(), (key, value) ->
-      settings[key] = value
+      defaults[key] = $.extend defaults[key], value
 
-    settings = $.extend settings, options
+    settings = $.extend defaults, options
 
     $(this).data('items', settings.presets)
 
     self = this
 
+    $('#inputHttpHeaderFieldName').typeahead({source: settings.headers})
     selected = undefined
 
     add = ->
-      name = $('#selectHttpHeaderFieldName').val()
+      name = $('#inputHttpHeaderFieldName').val()
       value = $('#inputHttpHeaderValue').val()
       if !!name and !!value
         tmp_items = items()
@@ -37,12 +72,12 @@ $.fn.extend
       name = self.selected.data('key')
       headers = items()
       value = headers[name]
-      $('#selectHttpHeaderFieldName').val(name)
+      $('inputHttpHeaderFieldName').val(name)
       $('#inputHttpHeaderValue').val(value)
       $('#httpHeadersModal').modal('show')
 
     create = ->
-      $('#selectHttpHeaderFieldName').prop("selectedIndex",0)
+      $('#inputHttpHeaderFieldName').val('')
       $('#inputHttpHeaderValue').val('')
       $('#httpHeadersModal').modal('show')
 

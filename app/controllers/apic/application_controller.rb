@@ -1,8 +1,13 @@
 module Apic
   class ApplicationController < ActionController::Base
+
+    before_filter :custom_headers, :endpoints
+
     def index
-      Rails.logger.debug endpoints
-      endpoints
+    end
+
+    def custom_headers
+      @custom_headers ||= Apic::custom_headers
     end
 
     def endpoints
