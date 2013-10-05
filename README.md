@@ -57,6 +57,8 @@ class TestController < ActionController.base
 end
 ```
 
+Additionally, you can specify custom parameters via the UI so if you dont want to declare your action parameters in your controllers you can always add them from the APIc console.
+
 ### Initializer
 
 The apic:install generator will mount APIc to /apic and add in a default intializer providing examples of the route matching and authentication filtering.
@@ -131,7 +133,13 @@ This project rocks and uses MIT-LICENSE.
 
 ### Change log
 
-#### 2013.10.05
+#### 2013.10.05 version 0.0.4
+- Added support for declaring customized parameters in the APIc console UI.
+- Patched bug in action_params collection
+- Improved log output to show full request and response details.
+- Improved replay to rebuild the headers and endpoint section of the APIc console UI when you click on a history item.
+
+#### 2013.10.05 version 0.0.3
 - Removed the default 'api' route matching.
 - Rationalized route matching to ensure that internal and apic routes are not exposed as endpoints.
 - Altered history links to replay on single click instead of double click.
