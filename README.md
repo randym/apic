@@ -76,6 +76,21 @@ For example, if you have namespecs all of your api endpoints to /api/v1/ simply 
 Apic.route_matcher = /\/api\/v1\//
 ```
 
+#### Custom Headers
+
+When you add headers in APIc we automatically create typeahead options for standard request headers.
+However, many, many people define their own headers for use in a custom API. APIc lets you specify
+any custom headers you want to make available to the typeahead by setting an array of header names
+in the apic.rb initializer.
+
+```
+Apic.custom_headers = %w(HTTP-MY-AWESOME-HEADER HTTP-ANTOHER-AWESOME-HEADER)
+```
+
+Of course you can create any header you want in the UI, even if it is not defined as a custom header,
+but for other people using this tool in your organization or even in public would probably appreciate it if
+they didn't have to remember exactly what that header field name was!.
+
 #### Authentication filters
 
 When testing your API it is often convenient to know which routes require authentication as you will need to add those headers before sending your request.
@@ -112,3 +127,13 @@ I guess when all that is done, APIc goes to 1.0.0
 Just Do It!
 
 This project rocks and uses MIT-LICENSE.
+
+
+### Change log
+
+#### 2013.10.05
+- Removed the default 'api' route matching.
+- Rationalized route matching to ensure that internal and apic routes are not exposed as endpoints.
+- Altered history links to replay on single click instead of double click.
+- added support for customized headers typeahead matching when setting a header.
+
