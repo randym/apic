@@ -46,7 +46,7 @@ To make this as simple and painless as possible, APIc exposes a DSL to your cont
 APIc knows what type of routes are available and will automatically add in the _method parameter and value for PATCH and DELETE requests.
 
 ```
-class TestController << ActionController.base
+class TestController < ActionController.base
 
   apic_action_params create: [:name, :acceptance]
 
