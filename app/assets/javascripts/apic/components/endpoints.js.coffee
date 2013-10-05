@@ -13,7 +13,7 @@ $.fn.extend
 
     $.each endpoints, (key, value) ->
       option = $('<option>'+ key + '</option>')
-      option.text('[restricted] ' + option.text()) if value.authorization_required
+      option.text('[restricted] ' + option.text()) if value.authentication_required
       $(settings.select).append(option)
 
     change = ->
