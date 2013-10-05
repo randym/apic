@@ -4,15 +4,15 @@
 $.fn.extend
   apic_console: (options) ->
     settings =
-      endpoint: '.endpoints-component',
-      headers: '.http-headers',
-      params: '.parameter',
-      console: '.console',
-      console_log: '.console-log',
-      history: '.xhr-history',
-      host: 'localhost:3000',
-      request_timeout: 10000,
-      timeout_callback: null,
+      endpoint: '.endpoints-component'
+      headers: '.http-headers'
+      params: '.parameter'
+      console: '.console'
+      console_log: '.console-log'
+      history: '.xhr-history'
+      host: 'localhost:3000'
+      request_timeout: 10000
+      timeout_callback: null
       response_callback: null
 
     self = this
@@ -21,31 +21,14 @@ $.fn.extend
 
     settings = $.extend settings, options
 
-    log_timeline = (method, uri) ->
-      self._end = new Date().getTime()
-      if console.log
-        console.log 'Finished: (time: ' + duration() + '):' + method + ' ' + uri
-
-    log_request = (xhr)  ->
-      self._start = new Date().getTime()
-
-      $(settings.console_log).empty()
-      log_item "Request URL", uri()
-      log_item "Request Method", endpoint().verb
-      log_item "Response Code", [xhr.status, xhr.statusText].join(' ')
-      log_item "Request Headers", xhr.getAllResponseHeaders()
-
-    log_item = (title, message) ->
-      $(settings.console_log).append('<div><span class="log-header">' + title + '</span>:<span class="log-data"> ' + message + '</span></div>')
-
     duration = ->
       seconds = 0
-      time = _end - _start
+      time = self._end - self._start
       try
         seconds = ((time/10) / 60).toFixed(2)
       catch e
         0
-      seconds
+      seconds + ' seconds'
 
     endpoint = ->
       $(settings.endpoint).data('endpoint')
@@ -57,21 +40,23 @@ $.fn.extend
       path  = endpoint().path
       for part in endpoint().parts
          path = path.replace(':' + part, value_for part)
-      if endpoint().verb is 'GET'
-        path += query_string()
+       if endpoint().verb is 'GET' and query_string().lenght > 0
+         path = [path, query_string()].join('?')
       path
 
 
     value_for = (name) ->
-      $(settings.params + ' [name="' + name + '"]').val()
+      $(settings.params + ' input[name="' + name + '"]').val()
 
     parameters = ->
       endpoint().template
 
     body = ->
       hash = {}
-      for param in parameters()
-        hash[param] = value_for param
+      $.each $(settings.params + ' input'), (index, input) ->
+        name = $(input).attr 'name'
+        unless endpoint().parts.indexOf(name) >= 0
+          hash[name] = value_for name
       hash
 
     query_string = ->
@@ -81,6 +66,10 @@ $.fn.extend
       args.join '&'
 
     onload = (xhr) ->
+      self._end = new Date().getTime()
+      request = record(xhr)
+      $(settings.console_log).text JSON.stringify(request, undefined, 2)
+
       if xhr.status is 200
         try
           json = JSON.parse(xhr.responseText)
@@ -91,11 +80,8 @@ $.fn.extend
       else
         $(settings.console).text(xhr.responseText)
 
-      log_request xhr
-      record(xhr)
-
     onerror = (response) ->
-      console.log response
+      $(settings.console).text 'A network error has occurred. Please refresh the page and ensure that network connections to your API are possible'
 
     request = (endpoint, headers, uri) ->
       xhr = new XMLHttpRequest
@@ -132,14 +118,18 @@ $.fn.extend
         params[$(param).attr('name')] = $(param).val()
 
       history_item =
-        endpoint: endpoint()
-        headers: headers()
-        body: body()
         uri: uri()
-        xhr: xhr
+        duration: duration()
+        headers: headers()
         parameters: params
+        response: {status: xhr.status, statusText: xhr.statusText }
+        responseHeaders: xhr.getAllResponseHeaders().split('\r\n')
+        endpoint: endpoint()
+      if endpoint().verb != 'GET'
+        history_item['body'] = body()
 
       $(settings.history).trigger('add', [history_item])
+      history_item
 
     replay = (request) ->
       r = $.extend true, {}, request
@@ -148,6 +138,7 @@ $.fn.extend
       send r.endpoint, r.headers, r.body, r.uri
 
     send = (_point, _head, _bod, _u) ->
+      self._start = new Date().getTime()
       _point ||= endpoint()
       _head ||= headers()
       _bod ||= body()

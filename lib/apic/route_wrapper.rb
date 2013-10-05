@@ -64,7 +64,7 @@ module Apic
     end
 
     def template
-      Apic::ParamsCache.params_for(controller, action_name) || []
+      Apic::ParamsCache.params_for(requirements[:controller], action_name) || []
     end
   end
 end
