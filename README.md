@@ -133,6 +133,9 @@ This project rocks and uses MIT-LICENSE.
 
 ### Change log
 
+#### 2013.10.08 version 0.0.5
+- Removed dependency on bootstrap-sass as it can conflict with repos that use their own bootstrap gem.
+
 #### 2013.10.05 version 0.0.4
 - Added support for declaring customized parameters in the APIc console UI.
 - Patched bug in action_params collection

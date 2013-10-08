@@ -11,6 +11,3 @@
 // about supported directives.
 //= require jquery
 //= require_tree .
-//
-//= require bootstrap-modal
-//= require bootstrap-typeahead
