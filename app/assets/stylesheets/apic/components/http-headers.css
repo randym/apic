@@ -10,34 +10,31 @@
   margin-left: 10px;
   min-height: 130px;
   overflow-y: scroll;
-  .http-headers {
-    ul {
+}
+
+.http-headers-component > .http-headers > ul{
       border: 1px solid #eee;
       min-height: 100px;
       margin-bottom: 5px;
-    }
-    .header-key {
+}
+.http-headers-component > .header-key {
       display: inline-block;
       height: 100%;
       width: 180px;
       text-align: right;
       padding-right: 10px;
       overflow: hidden;
-    }
-    a {
-      span {
+}
+.http-headers-component > a > span{
         display: inline-block;
         overflow: hidden;
-      }
-    }
-    a:hover {
+}
+.http-headers-component > a:hover {
       background-color: #0088cc;
-      color: #FFF
-    }
-  }
-  .http-headers-controls {
+      color: #FFF;
+}
+.http-headers-component > .http-headers-controls {
     margin-bottom: 5px;
     margin-left: 5px;
-  }
 }
 

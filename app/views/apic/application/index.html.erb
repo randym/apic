@@ -1,0 +1,20 @@
+<div class="container">
+  <%= render :partial => "navigation" %>
+  <%= render :partial => "apic/application/components/http_headers" %>
+  <div class="row endpoints">
+    <%= render :partial => "apic/application/components/endpoints" %>
+  </div>
+  <div class="row">
+    <div class="btn-toolbar">
+      <button id="do-me" class="btn btn-primary" href="#">
+        Send
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <%= render :partial => "apic/application/components/console" %>
+  </div>
+  <div class="row history">
+    <%= render :partial => "apic/application/components/xhr_history" %>
+  </div>
+</div>

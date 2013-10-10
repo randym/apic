@@ -5,12 +5,16 @@
 }
 .xhr-history {
   list-style-type: none;
-  i.forbidden {
+}
+.xhr-history-item > a i {
+    margin-right: 5px;
+}
+i.ok {
+  background-color: green;
+  color: white;
+}
+i.forbidden {
     background-color: red;
     margin-right: 5px;
-  }
-  i.ok {
-    background-color: green;
-    margin-right: 5px;
-  }
 }
+

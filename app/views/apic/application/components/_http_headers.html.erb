@@ -1,0 +1,42 @@
+<div class="row headers">
+  <div class="http-headers-component">
+    <h4>HTTP Headers</h4>
+    <div class="http-headers" data-headers="<%="#{@custom_headers}"%>">
+      <ul class="http-headers-list nav nav-list"></ul>
+    </div>
+    <div class="http-headers-controls">
+      <a class="btn create-http-header" href="#httpHeadersModal">+</a>
+      <a href="#" class="btn remove-http-header">-</a>
+    </div>
+  </div>
+  <div class="modal hide fade" id="httpHeadersModal">
+    <div class="modal-header">
+      <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4>Http Headers</h4>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="inputHttpHeaderFieldName")>
+            Header
+          </label>
+          <div class="controls">
+            <input id="inputHttpHeaderFieldName"></input>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputHttpHeaderValue">
+            Value
+          </label>
+          <div class="controls">
+            <input class="input-xxlarge" id="inputHttpHeaderValue" type="text" placeholder="value"></input>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" href='#' data-dismiss='modal'>Cancel</a>
+      <a class="btn btn-primary add-http-header" href="#">Ok</a>
+    </div>
+  </div>
+</div>

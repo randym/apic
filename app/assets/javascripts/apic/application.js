@@ -9,5 +9,5 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require jquery
+//= require apic/jquery/jquery-1.10.2.min.js
 //= require_tree .

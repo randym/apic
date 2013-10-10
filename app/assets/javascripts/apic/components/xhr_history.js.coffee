@@ -15,7 +15,7 @@ $.fn.extend
         $(self).append el
 
     list_item = (item) ->
-      $('<li class="xhr-history-item ' + item.response.statusText.toLowerCase() + '"><a href="#"><i class="icon-refresh icon-white ' + item.response.statusText.toLowerCase() + '"/><i>' + item.response.status + ' '+ item.endpoint.verb + ' ' + item.uri + '</span></a></li>')
+      $('<li class="xhr-history-item ' + item.response.statusText.toLowerCase() + '"><a href="#"><i class="' + item.response.statusText.toLowerCase() + ' icon-refresh icon-white "/><span>' + item.response.status + ' '+ item.endpoint.verb + ' ' + item.uri + '</span></a></li>')
 
     items = ->
       $(self).data('items')

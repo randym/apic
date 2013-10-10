@@ -11,11 +11,3 @@
  *= require_self
  *= require_tree .
  */
-body {
-  padding-top: 40px;
-}
-.navbar {
-  .brand {
-    margin-left: 5px;
-  }
-}
