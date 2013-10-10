@@ -112,9 +112,9 @@ If it doesn't, send me a pull request!!
 APIc is still in the very early days. I've gone with greater developer (as in me!) productivity at the cost of more dependencies
 in the gem. Moving forward, I'd like to see the following:
 
-- Rebuild views with vanilla erb so I can drop slim-rails
-- Find someone who rocks at css/design and ditch bootstrap/sass
-- Rewrite the jquery plugins in vanilla js so I can drop jquery and coffee
+- [x] Rebuild views with vanilla erb so I can drop slim-rails
+- [-] Find someone who rocks at css/design and ditch bootstrap/sass
+- [-] Rewrite the jquery plugins in vanilla js so I can drop jquery and coffee
 
 Under the 'fun' section comes
 
@@ -132,6 +132,10 @@ This project rocks and uses MIT-LICENSE.
 
 
 ### Change log
+
+#### 2013.10.10 version 0.0.6
+- Removed dependencies on jquery-rails and bootstrap by bundling a static resources namespaced within the gem.
+- Re-wrote all views with erb and dropped slim dependency as well.
 
 #### 2013.10.08 version 0.0.5
 - Removed dependency on bootstrap-sass as it can conflict with repos that use their own bootstrap gem.
