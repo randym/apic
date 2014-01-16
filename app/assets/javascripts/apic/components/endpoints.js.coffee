@@ -81,4 +81,4 @@ $.fn.extend
     $(self).on 'set', (e, point, params) -> set.apply self, [point, params]
     change.apply self
 
-    this
+    true

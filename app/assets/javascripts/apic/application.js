@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 
-//= require apic/jquery/apic.jquery-1.10.2.min.js
+//= require apic/jquery/apic.jquery-1.10.2.min
 //= require apic/bootstrap/apic.bootstrap.min.js
 //= require_tree ./components/
 //= require apic/apic.js
